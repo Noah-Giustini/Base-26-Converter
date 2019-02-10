@@ -24,11 +24,29 @@ def convertTo(x):
         del result[-1]
     print(string)
 
+def convertFrom(x):
+    result = []
+    string = ""
+    num = list(x)
+    for i in num:
+        temp=ord(i)
+        temp -= 97
+        string += str(temp)
+    print(string)
+
+
+
 
 def main():
     if len(sys.argv) == 3:
         input1 = eval(sys.argv[1])
-        input2 = eval(sys.argv[2])
+        try:
+            input2 = int(sys.argv[2])
+        except:
+            try:
+                input2 = str(sys.argv[2])
+            except:
+                sys.exit("There was an error with your input number") 
     else:
         sys.exit("Incorrect number of arguments given. must be given as: python base26.py mode number")
     try:
@@ -38,7 +56,7 @@ def main():
     
     if mode == 1:   #convert to
         try:
-            num = input2
+            num = int(input2)
         except:
             sys.exit("Invalid number. Must be of type int in order to convert to alpha")
         
@@ -48,11 +66,10 @@ def main():
             print(type(input2))
             sys.exit("Invalid number. Must be an integer greater than or equal to 0")
 
-    elif mode == 2:   #convert to
+    elif mode == 2:   #convert from
         try:
             num = str(input2)
-            print(mode)
-            print(num)
+            convertFrom(num)
         except:
             sys.exit("Invalid number. Must be of type str in order to convert to alpha")
 
