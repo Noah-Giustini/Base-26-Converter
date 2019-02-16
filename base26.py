@@ -1,34 +1,43 @@
 import sys
-import math
 
+#The convertTo method takes one parameter x and is the input integer that will be converted to a base26 number
 def convertTo(x):
     num = x
     result = []
     string = ""
     alpha = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+    #While loop to convert the last one or two digits from the input integer into the base 26 equivalent
     while num >= 0:
         last2 = num%100
+        #convert the last digit to base26
         if last2 > 25:
             temp = last2%10
             result.append(alpha[temp])
             num = num//10
             if num == 0:    #if we set num to 0 above
                 num = -1    #make loop halt
+        #convert the last two digits to base26
         else:
             result.append(alpha[last2])
             num = num//100
             if num == 0:    #if we set num to 0 above
                 num = -1    #make loop halt
+    #while the result is not empty we append the last element of result to string and remove the last element from result
     while result != []:
         string += result[-1]
         del result[-1]
+    #print output
     print(string)
 
 def convertFrom(x):
+    inpt = x.lower()
     result = []
     string = ""
-    num = list(x)
+    alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    num = list(inpt)
     for i in num:
+        if i not in alpha:
+            sys.exit("Illegal input. input can only contain characters a-z")
         temp=ord(i)
         temp -= 97
         string += str(temp)
